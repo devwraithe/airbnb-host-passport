@@ -22,6 +22,8 @@ class LocationsListState extends State<LocationsList> {
                   horizontal: 20,
                   vertical: 22,
                 ),
+
+                // equivalent to listing_item
                 child: LocationItem(
                   location: location,
                 ),
