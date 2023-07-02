@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../data/locations.dart';
-import 'location_item.dart';
+import 'listing_item_widget.dart';
 
 class LocationsList extends StatefulWidget {
   const LocationsList({Key? key}) : super(key: key);
@@ -24,8 +24,8 @@ class LocationsListState extends State<LocationsList> {
                 ),
 
                 // equivalent to listing_item
-                child: LocationItem(
-                  location: location,
+                child: ListingItemWidget(
+                  listing: location,
                 ),
               ),
           ],

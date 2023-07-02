@@ -1,15 +1,15 @@
 import 'package:airbnb_host_passport/data/location_model.dart';
+import 'package:airbnb_host_passport/presentation/widgets/roaa/book_flip.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/roaa/book_flip.dart';
-
+// switch to ListingScreen
 class ListingPage extends StatelessWidget {
+  final Location listing;
+
   const ListingPage(
     this.listing, {
     super.key,
   });
-
-  final Location listing;
 
   @override
   Widget build(BuildContext context) {
@@ -57,36 +57,36 @@ class ListingPage extends StatelessWidget {
                       padding: const EdgeInsets.all(20),
                       child: Hero(
                         tag: 'listing_hero_${listing.id}',
-                        child: BookFlip(
-                          listing,
+                        child: PassportFlip(
+                          listing: listing,
                           initialFlipProgress: 1,
                         ),
                       ),
                     ),
-                    // ...List.generate(
-                    //   listing.infoItems.length,
-                    //       (index) => Padding(
-                    //     padding: const EdgeInsets.symmetric(
-                    //       horizontal: 20,
-                    //       vertical: 5,
-                    //     ),
-                    //     child: Row(
-                    //       children: [
-                    //         Icon(
-                    //           listing.infoItems[index].icon,
-                    //           size: 30,
-                    //         ),
-                    //         const SizedBox(width: 10),
-                    //         Expanded(
-                    //           child: Text(
-                    //             listing.infoItems[index].text,
-                    //             style: const TextStyle(fontSize: 18),
-                    //           ),
-                    //         ),
-                    //       ],
-                    //     ),
-                    //   ),
-                    // ),
+                    ...List.generate(
+                      listing.infoItems.length,
+                      (index) => Padding(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 20,
+                          vertical: 5,
+                        ),
+                        child: Row(
+                          children: [
+                            Icon(
+                              listing.infoItems[index].icon,
+                              size: 30,
+                            ),
+                            const SizedBox(width: 10),
+                            Expanded(
+                              child: Text(
+                                listing.infoItems[index].text,
+                                style: const TextStyle(fontSize: 18),
+                              ),
+                            ),
+                          ],
+                        ),
+                      ),
+                    ),
                     const SizedBox(height: 10),
                     Padding(
                       padding: const EdgeInsets.symmetric(

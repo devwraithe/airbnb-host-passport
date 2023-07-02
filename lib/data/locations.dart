@@ -1,4 +1,5 @@
 import 'package:airbnb_host_passport/data/location_model.dart';
+import 'package:airbnb_host_passport/presentation/widgets/items.dart';
 
 final List locations = [
   const Location(
@@ -14,6 +15,7 @@ final List locations = [
     timeTo: 'Aug 5th',
     amount: '\$52',
     rating: '0',
+    infoItems: infoItems,
     reviews: '1',
     yearsHosting: '1',
   ),
@@ -30,6 +32,7 @@ final List locations = [
     timeTo: 'Jul 6th',
     amount: '\$46',
     rating: '4.92',
+    infoItems: infoItems,
     reviews: '25',
     yearsHosting: '1',
   ),
@@ -46,6 +49,7 @@ final List locations = [
     timeTo: 'Jul 7th',
     amount: '\$56',
     rating: '4.89',
+    infoItems: infoItems,
     reviews: '9',
     yearsHosting: '9',
   ),

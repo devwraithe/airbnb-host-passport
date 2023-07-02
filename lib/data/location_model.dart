@@ -11,6 +11,7 @@ class Location {
       rating,
       reviews,
       yearsHosting;
+  final List infoItems;
 
   const Location({
     required this.id,
@@ -25,5 +26,6 @@ class Location {
     required this.rating,
     required this.reviews,
     required this.yearsHosting,
+    required this.infoItems,
   });
 }

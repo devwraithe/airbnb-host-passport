@@ -1,9 +1,7 @@
-import 'package:airbnb_host_passport/core/app_colors.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
 import '../widgets/locations_list.dart';
-import '../widgets/mock_search_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -12,9 +10,10 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
-  static String baseUrl = "https://a0.muscache.com/pictures";
-
   late TabController _tabController;
+
+  // base url for the icons
+  static String baseUrl = "https://a0.muscache.com/pictures";
 
   final _tabs = [
     thisTab(
@@ -72,47 +71,48 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return Scaffold(
+    return const Scaffold(
       body: Column(
         children: [
-          Container(
-            decoration: const BoxDecoration(
-              boxShadow: [
-                BoxShadow(
-                  color: AppColors.grey,
-                  blurRadius: 4,
-                ),
-              ],
-              color: Colors.white,
-            ),
-            child: SafeArea(
-              child: Column(
-                children: [
-                  const Padding(
-                    padding: EdgeInsets.fromLTRB(20, 18, 20, 0),
-                    child: MockSearchBar(),
-                  ),
-                  const SizedBox(height: 12),
-                  TabBar(
-                    controller: _tabController,
-                    tabs: _tabs,
-                    isScrollable: true,
-                    indicatorSize: TabBarIndicatorSize.tab,
-                    labelStyle: const TextStyle(
-                      fontSize: 12,
-                      fontFamily: "Circular Std",
-                    ),
-                    padding: const EdgeInsets.symmetric(horizontal: 0),
-                    labelPadding: const EdgeInsets.symmetric(horizontal: 21),
-                    labelColor: Colors.black,
-                    indicatorColor: Colors.black,
-                  ),
-                ],
-              ),
-            ),
-          ),
-          const SizedBox(height: 6),
-          const LocationsList(),
+          // the tab bar
+          // Container(
+          //   decoration: const BoxDecoration(
+          //     boxShadow: [
+          //       BoxShadow(
+          //         color: AppColors.grey,
+          //         blurRadius: 4,
+          //       ),
+          //     ],
+          //     color: Colors.white,
+          //   ),
+          //   child: SafeArea(
+          //     child: Column(
+          //       children: [
+          //         const Padding(
+          //           padding: EdgeInsets.fromLTRB(20, 18, 20, 0),
+          //           child: MockSearchBar(),
+          //         ),
+          //         const SizedBox(height: 12),
+          //         TabBar(
+          //           controller: _tabController,
+          //           tabs: _tabs,
+          //           isScrollable: true,
+          //           indicatorSize: TabBarIndicatorSize.tab,
+          //           labelStyle: const TextStyle(
+          //             fontSize: 12,
+          //             fontFamily: "Circular Std",
+          //           ),
+          //           padding: const EdgeInsets.symmetric(horizontal: 0),
+          //           labelPadding: const EdgeInsets.symmetric(horizontal: 21),
+          //           labelColor: Colors.black,
+          //           indicatorColor: Colors.black,
+          //         ),
+          //       ],
+          //     ),
+          //   ),
+          // ),
+          SizedBox(height: 6),
+          LocationsList(),
         ],
       ),
       // body: Column(
