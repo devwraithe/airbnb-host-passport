@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 import '../../core/app_colors.dart';
-import '../widgets/listings.dart';
+import '../widgets/listings_widget.dart';
 import '../widgets/mock_search_bar.dart';
 
 class HomeScreen extends StatefulWidget {
@@ -112,7 +112,7 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
             ),
           ),
           const SizedBox(height: 6),
-          const Listings(),
+          const ListingsWidget(),
         ],
       ),
       // body: Column(

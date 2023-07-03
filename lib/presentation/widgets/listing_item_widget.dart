@@ -1,30 +1,30 @@
+import 'package:airbnb_host_passport/core/app_colors.dart';
 import 'package:airbnb_host_passport/core/constants.dart';
 import 'package:airbnb_host_passport/data/location_model.dart';
 import 'package:airbnb_host_passport/presentation/widgets/listing_info_widget.dart';
 import 'package:airbnb_host_passport/presentation/widgets/roaa/book_flip.dart';
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
+import 'package:visibility_detector/visibility_detector.dart';
 
 import '../screens/listing_page.dart';
 
-class ListingItemWidget extends StatefulWidget {
+class ListingWidget extends StatefulWidget {
   final Listing listing;
 
-  const ListingItemWidget({
+  const ListingWidget({
     super.key,
     required this.listing,
   });
 
   @override
-  ListingItemWidgetState createState() => ListingItemWidgetState();
+  ListingWidgetState createState() => ListingWidgetState();
 }
 
-class ListingItemWidgetState extends State<ListingItemWidget>
+class ListingWidgetState extends State<ListingWidget>
     with SingleTickerProviderStateMixin {
-  // controllers for animation
   late AnimationController _animationController;
   late Animation<double> _curvedAnimation;
-  // animation for flip on scroll
   late Animation<double> _animation;
 
   @override
@@ -39,10 +39,11 @@ class ListingItemWidgetState extends State<ListingItemWidget>
       curve: Curves.easeInOut,
     );
 
-    // _animation = Tween<double>(
-    //   begin: 0,
-    //   end: 1,
-    // ).animate(curvedAnimation);
+    _animation = Tween<double>(
+      begin: 0,
+      end: 1,
+    ).animate(_curvedAnimation);
+
     super.initState();
   }
 
@@ -59,77 +60,84 @@ class ListingItemWidgetState extends State<ListingItemWidget>
       children: [
         SizedBox(
           height: Constants.listingHeight,
-          child: GestureDetector(
-            onTapDown: (_) => _animationController.animateTo(0.33),
-            onTapUp: (_) => _animationController.animateTo(0).then((value) {
-              _openListingPage(context);
-            }),
-            child: Stack(
-              children: [
-                // listing image
-                Positioned.fill(
-                  child: ClipRRect(
-                    child: CachedNetworkImage(
-                      imageUrl: widget.listing.image,
-                      fit: BoxFit.cover,
-                    ),
-                  ),
-                ),
-
-                // heart icon
-                const Positioned(
-                  top: 20,
-                  right: 20,
-                  child: Icon(
-                    Icons.favorite_border_rounded,
-                    color: Colors.white,
-                    size: 30,
-                  ),
-                ),
-
-                // the flip
-                Positioned(
-                  bottom: 25,
-                  left: 25,
-                  right: 0,
-                  child: Hero(
-                    tag: "listing_hero_${widget.listing.id}",
-                    flightShuttleBuilder: (
-                      BuildContext flightContext,
-                      Animation<double> animation,
-                      HeroFlightDirection flightDirection,
-                      BuildContext fromHeroContext,
-                      BuildContext toHeroContext,
-                    ) {
-                      final curvedAnimation = CurvedAnimation(
-                        parent: animation,
-                        curve: Curves.easeInOut,
-                      );
-                      final scaleAnimation = Tween<double>(
-                        begin: Constants.bookInitialScale,
-                        end: 1,
-                      ).animate(curvedAnimation);
-
-                      return ScaleTransition(
-                        scale: scaleAnimation,
-                        alignment: Alignment.bottomLeft,
-                        child: PassportFlip(
-                          listing: widget.listing,
-                          animationController: curvedAnimation,
-                        ),
-                      );
-                    },
-                    child: Transform.scale(
-                      scale: Constants.bookInitialScale,
-                      alignment: Alignment.bottomLeft,
-                      child: PassportFlip(
-                        listing: widget.listing,
-                        animationController: _curvedAnimation,
+          child: VisibilityDetector(
+            onVisibilityChanged: (visibilityInfo) {
+              if (visibilityInfo.visibleFraction == 1) {
+                _animationController.forward();
+                // _animationController.animateTo(0.33);
+              } else if (visibilityInfo.visibleFraction == 0) {
+                _animationController.animateTo(0);
+              }
+            },
+            key: const Key("visibility_key"),
+            child: GestureDetector(
+              // onTapDown: (_) => _animationController.animateTo(0.33),
+              // onTapUp: (_) => _animationController.animateTo(0).then((value) {
+              //   _openListingPage(context);
+              // }),
+              child: Stack(
+                children: [
+                  Positioned.fill(
+                    child: ClipRRect(
+                      borderRadius: Constants.listingRadius,
+                      child: CachedNetworkImage(
+                        imageUrl: widget.listing.image,
+                        fit: BoxFit.cover,
                       ),
                     ),
                   ),
-                ),
-              ],
+                  const Positioned(
+                    top: 20,
+                    right: 20,
+                    child: Icon(
+                      Icons.favorite_border_rounded,
+                      color: AppColors.white,
+                      size: 30,
+                    ),
+                  ),
+                  Positioned(
+                    bottom: 25,
+                    left: 25,
+                    right: 0,
+                    child: Hero(
+                      tag: "listing_hero_${widget.listing.id}",
+                      flightShuttleBuilder: (
+                        BuildContext flightContext,
+                        Animation<double> animation,
+                        HeroFlightDirection flightDirection,
+                        BuildContext fromHeroContext,
+                        BuildContext toHeroContext,
+                      ) {
+                        final curvedAnimation = CurvedAnimation(
+                          parent: animation,
+                          curve: Curves.easeInOut,
+                        );
+                        final scaleAnimation = Tween<double>(
+                          begin: Constants.bookInitialScale,
+                          end: 1,
+                        ).animate(curvedAnimation);
+
+                        return ScaleTransition(
+                          scale: scaleAnimation,
+                          alignment: Alignment.bottomLeft,
+                          child: PassportFlip(
+                            listing: widget.listing,
+                            animationController: curvedAnimation,
+                          ),
+                        );
+                      },
+                      child: Transform.scale(
+                        scale: Constants.bookInitialScale,
+                        alignment: Alignment.bottomLeft,
+                        child: PassportFlip(
+                          listing: widget.listing,
+                          animationController: _curvedAnimation,
+                        ),
+                      ),
+                    ),
+                  ),
+                ],
+              ),
             ),
           ),
         ),

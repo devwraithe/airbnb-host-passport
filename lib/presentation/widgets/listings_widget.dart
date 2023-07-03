@@ -3,13 +3,14 @@ import 'package:flutter/material.dart';
 import '../../data/locations.dart';
 import 'listing_item_widget.dart';
 
-class Listings extends StatefulWidget {
-  const Listings({Key? key}) : super(key: key);
+class ListingsWidget extends StatefulWidget {
+  const ListingsWidget({Key? key}) : super(key: key);
+
   @override
-  ListingsState createState() => ListingsState();
+  ListingsWidgetState createState() => ListingsWidgetState();
 }
 
-class ListingsState extends State<Listings> {
+class ListingsWidgetState extends State<ListingsWidget> {
   @override
   Widget build(BuildContext context) {
     return Expanded(
@@ -22,7 +23,7 @@ class ListingsState extends State<Listings> {
                   horizontal: 20,
                   vertical: 22,
                 ),
-                child: ListingItemWidget(
+                child: ListingWidget(
                   listing: listing,
                 ),
               ),
