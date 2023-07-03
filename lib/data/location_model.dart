@@ -1,4 +1,4 @@
-class Location {
+class Listing {
   final int id;
   final String city,
       country,
@@ -13,7 +13,7 @@ class Location {
       yearsHosting;
   final List infoItems;
 
-  const Location({
+  const Listing({
     required this.id,
     required this.city,
     required this.country,

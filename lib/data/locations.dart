@@ -1,8 +1,8 @@
 import 'package:airbnb_host_passport/data/location_model.dart';
 import 'package:airbnb_host_passport/presentation/widgets/items.dart';
 
-final List locations = [
-  const Location(
+final List listings = [
+  const Listing(
     id: 1,
     city: "Mexico City",
     country: "Mexico",
@@ -19,7 +19,7 @@ final List locations = [
     reviews: '1',
     yearsHosting: '1',
   ),
-  const Location(
+  const Listing(
     id: 2,
     city: "Ottawa",
     country: "Canada",
@@ -36,7 +36,7 @@ final List locations = [
     reviews: '25',
     yearsHosting: '1',
   ),
-  const Location(
+  const Listing(
     id: 3,
     city: "Coatia",
     country: "Brazil",

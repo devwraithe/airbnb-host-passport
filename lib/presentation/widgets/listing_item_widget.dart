@@ -8,7 +8,7 @@ import 'package:flutter/material.dart';
 import '../screens/listing_page.dart';
 
 class ListingItemWidget extends StatefulWidget {
-  final Location listing;
+  final Listing listing;
 
   const ListingItemWidget({
     super.key,

@@ -1,7 +1,8 @@
-import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 
-import '../widgets/locations_list.dart';
+import '../../core/app_colors.dart';
+import '../widgets/listings.dart';
+import '../widgets/mock_search_bar.dart';
 
 class HomeScreen extends StatefulWidget {
   const HomeScreen({Key? key}) : super(key: key);
@@ -71,48 +72,47 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
 
   @override
   Widget build(BuildContext context) {
-    return const Scaffold(
+    return Scaffold(
       body: Column(
         children: [
-          // the tab bar
-          // Container(
-          //   decoration: const BoxDecoration(
-          //     boxShadow: [
-          //       BoxShadow(
-          //         color: AppColors.grey,
-          //         blurRadius: 4,
-          //       ),
-          //     ],
-          //     color: Colors.white,
-          //   ),
-          //   child: SafeArea(
-          //     child: Column(
-          //       children: [
-          //         const Padding(
-          //           padding: EdgeInsets.fromLTRB(20, 18, 20, 0),
-          //           child: MockSearchBar(),
-          //         ),
-          //         const SizedBox(height: 12),
-          //         TabBar(
-          //           controller: _tabController,
-          //           tabs: _tabs,
-          //           isScrollable: true,
-          //           indicatorSize: TabBarIndicatorSize.tab,
-          //           labelStyle: const TextStyle(
-          //             fontSize: 12,
-          //             fontFamily: "Circular Std",
-          //           ),
-          //           padding: const EdgeInsets.symmetric(horizontal: 0),
-          //           labelPadding: const EdgeInsets.symmetric(horizontal: 21),
-          //           labelColor: Colors.black,
-          //           indicatorColor: Colors.black,
-          //         ),
-          //       ],
-          //     ),
-          //   ),
-          // ),
-          SizedBox(height: 6),
-          LocationsList(),
+          Container(
+            decoration: const BoxDecoration(
+              boxShadow: [
+                BoxShadow(
+                  color: AppColors.grey,
+                  blurRadius: 4,
+                ),
+              ],
+              color: Colors.white,
+            ),
+            child: const SafeArea(
+              child: Column(
+                children: [
+                  Padding(
+                    padding: EdgeInsets.all(20),
+                    child: MockSearchBar(),
+                  ),
+                  //         const SizedBox(height: 12),
+                  //         TabBar(
+                  //           controller: _tabController,
+                  //           tabs: _tabs,
+                  //           isScrollable: true,
+                  //           indicatorSize: TabBarIndicatorSize.tab,
+                  //           labelStyle: const TextStyle(
+                  //             fontSize: 12,
+                  //             fontFamily: "Circular Std",
+                  //           ),
+                  //           padding: const EdgeInsets.symmetric(horizontal: 0),
+                  //           labelPadding: const EdgeInsets.symmetric(horizontal: 21),
+                  //           labelColor: Colors.black,
+                  //           indicatorColor: Colors.black,
+                  //         ),
+                ],
+              ),
+            ),
+          ),
+          const SizedBox(height: 6),
+          const Listings(),
         ],
       ),
       // body: Column(
@@ -154,15 +154,15 @@ class _HomeScreenState extends State<HomeScreen> with TickerProviderStateMixin {
   }
 
   // tab item - move to sep file later
-  static Widget thisTab(String icon, String label) {
-    return Tab(
-      icon: CachedNetworkImage(
-        imageUrl: icon,
-        width: 26,
-        height: 26,
-      ),
-      iconMargin: const EdgeInsets.only(bottom: 8),
-      text: label,
-    );
-  }
+  // static Widget thisTab(String icon, String label) {
+  //   return Tab(
+  //     icon: CachedNetworkImage(
+  //       imageUrl: icon,
+  //       width: 26,
+  //       height: 26,
+  //     ),
+  //     iconMargin: const EdgeInsets.only(bottom: 8),
+  //     text: label,
+  //   );
+  // }
 }

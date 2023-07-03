@@ -9,7 +9,7 @@ import 'book_cover_back.dart';
 import 'book_cover_front.dart';
 
 class PassportFlip extends StatefulWidget {
-  final Location listing;
+  final Listing listing;
   final double initialFlipProgress;
   final Animation<double>? animationController;
 

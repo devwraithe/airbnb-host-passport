@@ -9,7 +9,7 @@ class HostInfo extends StatelessWidget {
     required this.location,
   }) : super(key: key);
 
-  final Location location; // or listing
+  final Listing location; // or listing
 
   @override
   Widget build(BuildContext context) {

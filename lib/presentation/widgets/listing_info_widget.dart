@@ -2,7 +2,7 @@ import 'package:airbnb_host_passport/data/location_model.dart';
 import 'package:flutter/material.dart';
 
 class ListingInfoWidget extends StatelessWidget {
-  final Location listing;
+  final Listing listing;
   const ListingInfoWidget({
     super.key,
     required this.listing,

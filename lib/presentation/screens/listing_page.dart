@@ -4,7 +4,7 @@ import 'package:flutter/material.dart';
 
 // switch to ListingScreen
 class ListingPage extends StatelessWidget {
-  final Location listing;
+  final Listing listing;
 
   const ListingPage(
     this.listing, {

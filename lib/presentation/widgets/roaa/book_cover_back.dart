@@ -7,7 +7,7 @@ class BookCoverBack extends StatelessWidget {
     required this.listing,
   }) : super(key: key);
 
-  final Location listing;
+  final Listing listing;
 
   @override
   Widget build(BuildContext context) {

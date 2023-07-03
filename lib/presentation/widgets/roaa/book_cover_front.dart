@@ -8,7 +8,7 @@ class BookCoverFront extends StatelessWidget {
     super.key,
   });
 
-  final Location listing;
+  final Listing listing;
 
   @override
   Widget build(BuildContext context) {
