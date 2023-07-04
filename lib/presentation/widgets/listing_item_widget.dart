@@ -60,45 +60,55 @@ class ListingWidgetState extends State<ListingWidget>
       children: [
         SizedBox(
           height: Constants.listingHeight,
-          child: VisibilityDetector(
-            onVisibilityChanged: (visibilityInfo) {
-              if (visibilityInfo.visibleFraction == 1) {
-                _animationController.forward();
-                // _animationController.animateTo(0.33);
-              } else if (visibilityInfo.visibleFraction == 0) {
-                _animationController.animateTo(0);
-              }
-            },
-            key: const Key("visibility_key"),
-            child: GestureDetector(
-              // onTapDown: (_) => _animationController.animateTo(0.33),
-              // onTapUp: (_) => _animationController.animateTo(0).then((value) {
-              //   _openListingPage(context);
-              // }),
-              child: Stack(
-                children: [
-                  Positioned.fill(
-                    child: ClipRRect(
-                      borderRadius: Constants.listingRadius,
-                      child: CachedNetworkImage(
-                        imageUrl: widget.listing.image,
-                        fit: BoxFit.cover,
-                      ),
-                    ),
+          child: Stack(
+            children: [
+              Positioned.fill(
+                child: ClipRRect(
+                  borderRadius: Constants.listingRadius,
+                  child: CachedNetworkImage(
+                    imageUrl: widget.listing.image,
+                    fit: BoxFit.cover,
                   ),
-                  const Positioned(
-                    top: 20,
-                    right: 20,
-                    child: Icon(
-                      Icons.favorite_border_rounded,
-                      color: AppColors.white,
-                      size: 30,
+                ),
+              ),
+              const Positioned(
+                top: 20,
+                right: 20,
+                child: Icon(
+                  Icons.favorite_border_rounded,
+                  color: AppColors.white,
+                  size: 30,
+                ),
+              ),
+              VisibilityDetector(
+                onVisibilityChanged: (visibilityInfo) {
+                  if (visibilityInfo.visibleFraction == 1) {
+                    // _animationController.animateTo(0.33);
+                    // animation makes sense but it's moving and animating
+                    _animationController.animateTo(
+                      0.33,
+                      duration: const Duration(milliseconds: 1000),
+                      curve: Curves.elasticOut,
+                    );
+                  } else if (visibilityInfo.visibleFraction == 0) {
+                    _animationController.animateTo(
+                      0,
+                      duration: const Duration(milliseconds: 0),
+                      curve: Curves.elasticIn,
+                    );
+                  }
+                },
+                key: Key(widget.listing.id.toString()),
+                child: GestureDetector(
+                  onTap: () => _animationController.animateTo(0).then((value) {
+                    _openListingPage(context);
+                  }),
+                  child: Container(
+                    alignment: Alignment.bottomLeft,
+                    margin: const EdgeInsets.only(
+                      bottom: 25,
+                      left: 25,
                     ),
-                  ),
-                  Positioned(
-                    bottom: 25,
-                    left: 25,
-                    right: 0,
                     child: Hero(
                       tag: "listing_hero_${widget.listing.id}",
                       flightShuttleBuilder: (
@@ -120,6 +130,7 @@ class ListingWidgetState extends State<ListingWidget>
                         return ScaleTransition(
                           scale: scaleAnimation,
                           alignment: Alignment.bottomLeft,
+                          filterQuality: FilterQuality.high,
                           child: PassportFlip(
                             listing: widget.listing,
                             animationController: curvedAnimation,
@@ -129,6 +140,7 @@ class ListingWidgetState extends State<ListingWidget>
                       child: Transform.scale(
                         scale: Constants.bookInitialScale,
                         alignment: Alignment.bottomLeft,
+                        filterQuality: FilterQuality.high,
                         child: PassportFlip(
                           listing: widget.listing,
                           animationController: _curvedAnimation,
@@ -136,9 +148,9 @@ class ListingWidgetState extends State<ListingWidget>
                       ),
                     ),
                   ),
-                ],
+                ),
               ),
-            ),
+            ],
           ),
         ),
         const SizedBox(height: 10),

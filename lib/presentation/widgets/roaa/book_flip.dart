@@ -35,7 +35,7 @@ class _PassportFlipState extends State<PassportFlip>
     _animationController = AnimationController(
       vsync: this,
       duration: const Duration(
-        milliseconds: 800,
+        milliseconds: 1000,
       ),
       value: widget.initialFlipProgress,
     );
@@ -75,9 +75,7 @@ class _PassportFlipState extends State<PassportFlip>
                 crossAxisAlignment: CrossAxisAlignment.stretch,
                 textDirection: TextDirection.rtl,
                 children: [
-                  Expanded(
-                    child: BookBack(widget.listing),
-                  ),
+                  Expanded(child: BookBack(widget.listing)),
                   Expanded(
                     child: Transform(
                       transform: Matrix4.identity()
@@ -96,7 +94,10 @@ class _PassportFlipState extends State<PassportFlip>
                                   child: Transform(
                                     transform: Matrix4.identity()
                                       ..setEntry(
-                                          3, 2, Constants.perspectiveValue)
+                                        3,
+                                        2,
+                                        Constants.perspectiveValue,
+                                      )
                                       ..rotateY(-pi),
                                     alignment: Alignment.center,
                                     child: BookCoverFront(widget.listing),
