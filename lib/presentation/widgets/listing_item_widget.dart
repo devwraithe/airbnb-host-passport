@@ -25,7 +25,6 @@ class ListingWidgetState extends State<ListingWidget>
     with SingleTickerProviderStateMixin {
   late AnimationController _animationController;
   late Animation<double> _curvedAnimation;
-  late Animation<double> _animation;
 
   @override
   void initState() {
@@ -38,11 +37,6 @@ class ListingWidgetState extends State<ListingWidget>
       parent: _animationController,
       curve: Curves.easeInOut,
     );
-
-    _animation = Tween<double>(
-      begin: 0,
-      end: 1,
-    ).animate(_curvedAnimation);
 
     super.initState();
   }
